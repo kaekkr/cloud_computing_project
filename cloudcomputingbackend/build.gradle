@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(23)
+		languageVersion = JavaLanguageVersion.of(22)
 	}
 }
 
@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.theokanning.openai-gpt3-java:service:0.18.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'com.azure:azure-core:1.54.1'
