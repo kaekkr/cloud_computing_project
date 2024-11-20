@@ -9,9 +9,14 @@ import lombok.Data;
 import com.theokanning.openai.service.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.CompletionResult;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
+@Setter
+@Getter
+@Builder
 public class Query {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +28,6 @@ public class Query {
 	public Query() {
 		this.userInput = "";
 		this.botResponse = "Request is empty";
-	}
-
-	public String getBotResponse() {
-		return botResponse;
 	}
 
 	public Query(String userInput){
