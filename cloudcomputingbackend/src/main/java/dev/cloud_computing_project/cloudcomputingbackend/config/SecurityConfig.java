@@ -28,17 +28,19 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/queries/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .oauth2Login(oauth -> oauth
+                        .defaultSuccessUrl("/api/v1/auth/success")
+                        .failureUrl("/api/v1/auth/failure")
+                );
         return http.build();
     }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userService)
-                .passwordEncoder(passwordEncoder)
-                .and()
-                .build();
+        AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authBuilder.userDetailsService(userService)
+                .passwordEncoder(passwordEncoder);
+        return authBuilder.build();
     }
 
     @Bean
