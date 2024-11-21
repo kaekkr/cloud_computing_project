@@ -1,0 +1,123 @@
+.sidebarContainer {
+  padding: 15px 15px;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  /* Styles for phones and small tablets */
+  .sidebarContainer {
+    padding: 5px 5px;
+  }
+}
+.logo {
+  width: 59px;
+  transition: all 0.3s ease;
+}
+
+.menuIcon {
+  flex-shrink: 0;
+  min-width: 16px;
+}
+.header {
+  display: flex;
+  position: relative;
+  /* justify-content: center; */
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+.header .name {
+  font-size: 26px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  text-wrap: nowrap;
+  opacity: 1;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.name .secondary_title {
+  font-size: 11px;
+}
+
+.menu {
+  margin-top: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menuTitle {
+  text-transform: uppercase;
+  color: #858586;
+}
+
+.menuItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 20px;
+  opacity: 1;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.menuItem:hover {
+  background-color: hsl(var(--accent));
+  /* background-color: #efebeb; */
+  border-radius: 5px;
+  cursor: pointer;
+}
+.active {
+  background-color: #42ec91;
+  color: black;
+  border-radius: 5px;
+}
+
+.active:hover {
+  background-color: #42ec91;
+}
+
+.sidebar_closed {
+  display: flex;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.sidebar_closed .name {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  width: 0;
+}
+.menu_text {
+  opacity: 1;
+  width: 100%;
+}
+.sidebar_closed .menu_text {
+  width: 0;
+  opacity: 0;
+}
+
+.sidebar_closed .menuItem .menuIcon {
+  /* transform: translateX(calc(50%)); */
+  transition: all 0.3s ease;
+}
+
+.sidebar_closed .logo {
+  /* transform: translateX(7px); */
+  transition: all 0.3s ease;
+}
