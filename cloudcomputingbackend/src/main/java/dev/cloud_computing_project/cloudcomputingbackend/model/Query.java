@@ -16,7 +16,6 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-@Builder
 public class Query {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

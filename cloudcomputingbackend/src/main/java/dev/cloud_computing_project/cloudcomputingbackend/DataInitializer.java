@@ -2,7 +2,9 @@ package dev.cloud_computing_project.cloudcomputingbackend;
 
 import dev.cloud_computing_project.cloudcomputingbackend.model.User;
 import dev.cloud_computing_project.cloudcomputingbackend.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +14,13 @@ public class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataInitializer(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if (userRepository.findByUsername("user1").isEmpty()) {
             User user = new User(null, "user1", passwordEncoder.encode("password1"), "USER", false);
             userRepository.save(user);
