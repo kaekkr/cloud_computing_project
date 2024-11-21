@@ -2,13 +2,17 @@ package dev.cloud_computing_project.cloudcomputingbackend.service;
 
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.CompletionResult;
+import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.service.OpenAiService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ChatGPTService {
 
-    private final String apiKey = "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";
+    private final String apiKey = "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";
 
     public String getHealthcareAdvice(String userInput) {
         if (apiKey == null || apiKey.isEmpty()) {
@@ -17,20 +21,26 @@ public class ChatGPTService {
 
         OpenAiService service = new OpenAiService(apiKey);
 
-        String prompt = "A user describes their symptoms as follows: \"" + userInput +
-                "\". Based on this information, provide general healthcare advice. " +
-                "Avoid diagnosing conditions and suggest seeing a healthcare provider if necessary.";
+        // Create the system prompt and user input messages
+        ChatMessage systemMessage = new ChatMessage("system", "You are a helpful healthcare assistant. Provide general healthcare advice based on user symptoms without diagnosing conditions. Encourage consulting a healthcare provider when necessary.");
+        ChatMessage userMessage = new ChatMessage("user", userInput);
 
-        CompletionRequest request = CompletionRequest.builder()
-                .model("gpt-4") // Ensure you're using GPT-4
-                .prompt(prompt)
+        // Build the chat completion request
+        ChatCompletionRequest chatRequest = ChatCompletionRequest.builder()
+                .model("gpt-4") // Use a supported chat model
+                .messages(List.of(systemMessage, userMessage))
                 .maxTokens(300) // Adjust token limit as needed
                 .temperature(0.7) // Adjust creativity level
                 .build();
 
         try {
-            CompletionResult result = service.createCompletion(request);
-            return result.getChoices().getFirst().getText().trim();
+            // Send the request to OpenAI and get the response
+            return service.createChatCompletion(chatRequest)
+                    .getChoices()
+                    .getFirst()
+                    .getMessage()
+                    .getContent()
+                    .trim();
         } catch (Exception e) {
             e.printStackTrace();
             return "Sorry, I couldn't process your request. Please try again later.";

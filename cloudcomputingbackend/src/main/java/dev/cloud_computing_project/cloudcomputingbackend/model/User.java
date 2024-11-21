@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "has_subscription")
     private boolean hasSubscription;
 
     public boolean getHasSubscription() {
