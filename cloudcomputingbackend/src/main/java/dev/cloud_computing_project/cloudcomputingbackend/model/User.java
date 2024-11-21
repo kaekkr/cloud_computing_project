@@ -27,5 +27,9 @@ public class User {
 
     @Column(nullable = false)
     private boolean hasSubscription;
+
+    public boolean getHasSubscription() {
+        return this.hasSubscription;
+    }
 }
 
