@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/subscription")
 @RequiredArgsConstructor
+@CrossOrigin
 public class SubscriptionController {
 
     private final UserRepository userRepository;

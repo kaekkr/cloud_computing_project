@@ -16,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/bot")
 @RequiredArgsConstructor
+@CrossOrigin
 public class BotController {
 
     private final UserRepository userRepository;
@@ -54,11 +55,15 @@ public class BotController {
             String topIntent = responseNode.at("/result/prediction/topIntent").asText();
             double confidence = responseNode.at("/result/prediction/intents/0/confidenceScore").asDouble();
 
+            // Add intent and language to the response
+            response.put("intent", topIntent);
+            response.put("language", language);
+
             // Handle intents based on the topIntent
-            if ("Greetings".equals(topIntent) && confidence > 0.6) {
+            if ("Greetings".equals(topIntent) && confidence > 0.7) {
                 response.put("status", "success");
                 response.put("response", "Hello! How can I assist you today?");
-            } else if ("GetHealthcareAdvice".equals(topIntent) && confidence > 0.6) {
+            } else if ("GetHealthcareAdvice".equals(topIntent) && confidence > 0.7) {
                 String healthcareAdvice = chatGPTService.getHealthcareAdvice(userInput);
                 response.put("status", "success");
                 response.put("response", "Healthcare Advice: " + healthcareAdvice);
