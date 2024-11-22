@@ -1,0 +1,44 @@
+.pageTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 2.5rem;
+}
+
+.searchIcon {
+  color: #979797;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.rightItem {
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 820px) {
+  .username {
+    display: none;
+  }
+}
